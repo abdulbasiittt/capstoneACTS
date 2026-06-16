@@ -1,8 +1,6 @@
 # ACTS Frontend Demo Prototype
 
-This repository contains a high-fidelity frontend prototype for the bachelor capstone project **Adaptive Career Trajectory Simulation Engine (ACTS)**.
-
-## Project purpose
+This repository contains the frontend demo prototype for the bachelor capstone project **Adaptive Career Trajectory Simulation Engine (ACTS)**.
 
 ACTS is presented here as a web-based platform for:
 
@@ -13,9 +11,22 @@ ACTS is presented here as a web-based platform for:
 - saved results review
 - employer-side talent insight dashboards
 
-The prototype is **frontend only** and uses mock data plus simulated state transitions. It is designed for screenshots, demonstrations, and presentation walkthroughs.
+The prototype is frontend-only and uses mock data plus simulated state transitions. It is intended for demos, screenshots, walkthroughs, and academic presentations.
 
-## Stack
+## Run status
+
+This project can run after cloning from GitHub.
+
+I verified the following in this workspace:
+
+- `npm install` completes successfully
+- `npm run build` completes successfully
+- the production output is generated in `dist`
+
+Note:
+The first build attempt in this environment failed because of sandbox filesystem restrictions outside the project folder, not because of the app itself. The actual Vite production build succeeds.
+
+## Tech stack
 
 - React
 - Vite
@@ -25,13 +36,122 @@ The prototype is **frontend only** and uses mock data plus simulated state trans
 - Recharts
 - Lucide React
 
+## Project structure
+
+- `src/` application source code
+- `public/` static assets copied into the final build
+- `dist/` production build output
+- `netlify.toml` Netlify build configuration
+- `package.json` scripts and dependencies
+
+## Teammate setup
+
+### 1. Clone the repository
+
+```bash
+git clone <your-repository-url>
+cd CapstoneDemo
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Start the development server
+
+```bash
+npm run dev
+```
+
+Vite will print a local URL in the terminal, usually:
+
+```text
+http://localhost:5173
+```
+
+Open that URL in your browser.
+
+## Production build
+
+To generate the deployable build:
+
+```bash
+npm run build
+```
+
+The final output will be created in:
+
+```text
+dist/
+```
+
+To preview the production build locally:
+
+```bash
+npm run preview
+```
+
+## Recommended environment
+
+- Node.js 20 or newer
+- npm 10 or newer
+
+If you already have Node installed, you can check with:
+
+```bash
+node -v
+npm -v
+```
+
+## Main routes
+
+- `/` splash page
+- `/welcome` welcome page
+- `/home` landing / home page
+- `/login` role access
+- `/register` account registration
+- `/profile-setup` student profile setup
+- `/dashboard` student dashboard
+- `/jobs` student job search using employer-posted roles
+- `/skill-vector` skill profile and structured vector view
+- `/run-simulation` simulation controller
+- `/processing` staged ACTS engine processing screen
+- `/results` probabilistic pathway dashboard
+- `/skill-gap` skill gap analysis
+- `/history` saved simulation history
+- `/account` profile management
+- `/employer` employer dashboard
+- `/employer/company-setup` employer company registration, verification, presets, and job posting
+- `/employer/talent-insights` employer talent insights
+- `/employer/skill-trends` employer skill trends
+- `/about` methodology page
+
+## Demo credentials
+
+Named student demo accounts:
+
+- `abdul.basit@acts.my` / `12345`
+- `hysam@acts.my` / `123456`
+- `lin.tunoo@acts.my` / `1234567`
+- `poh.xinkat@acts.my` / `12345678`
+- `edwin@acts.my` / `123456789`
+
+Employer demo account:
+
+- `employer@acts.my` / `acts-employer`
+
+Newly registered users can sign in with the username and password they create on the register page.
+
 ## How the prototype maps to ACTS architecture
 
 - **User Layer**
   - Student / Job Seeker flow
   - Employer flow
 - **Presentation Layer**
-  - Landing page
+  - Welcome page
+  - Home page
   - Student dashboard
   - Employer dashboard
   - Results and skill gap pages
@@ -51,72 +171,43 @@ The prototype is **frontend only** and uses mock data plus simulated state trans
 - **External Data Source**
   - O*NET occupational mappings are represented in the UI copy and mock comparison logic
 
-## Main routes
+## Netlify deployment
 
-- `/` landing page
-- `/login` role access
-- `/profile-setup` student profile setup
-- `/dashboard` student dashboard
-- `/jobs` student job search using employer-posted roles
-- `/skill-vector` skill profile and structured vector view
-- `/run-simulation` simulation controller
-- `/processing` staged ACTS engine processing screen
-- `/results` probabilistic pathway dashboard
-- `/skill-gap` skill gap analysis
-- `/history` saved simulation history
-- `/account` profile management
-- `/employer` employer dashboard
-- `/employer/company-setup` employer company registration, verification, presets, and job posting
-- `/employer/talent-insights` employer talent insights
-- `/employer/skill-trends` employer skill trends
-- `/about` methodology page
+This repo is configured for Netlify with:
 
-## Development
+- Build command: `npm run build`
+- Publish directory: `dist`
 
-Install dependencies and run the Vite app:
+SPA routing support is handled through:
+
+- `public/_redirects`
+- `netlify.toml`
+
+## Troubleshooting
+
+### Git says "detected dubious ownership"
+
+On some Windows setups, Git may block commands with a safe-directory warning. If that happens, run:
+
+```bash
+git config --global --add safe.directory C:/path/to/your/cloned/repo
+```
+
+Then retry your Git command.
+
+### Port 5173 is already in use
+
+Close the other Vite session using that port, or run the app after stopping the conflicting process.
+
+### Dependencies do not install
+
+Make sure Node.js and npm are installed correctly, then try:
 
 ```bash
 npm install
-npm run dev
 ```
 
-Build for production:
-
-```bash
-npm run build
-```
-
-## Demo behavior
-
-- Demo Student Login opens the student dashboard
-- Demo Employer Login opens the employer dashboard
-- New user registration creates a local username/password account and opens profile setup
-- Profile edits update the mock ACTS state
-- Skill changes update the structured skill vector
-- Employer company setup can register a company profile, simulate company verification, save hiring presets, and publish jobs
-- Student users can search employer-posted jobs from the shared job board
-- Running a simulation opens a staged processing screen
-- Processing automatically generates mock results
-- New results are saved into simulation history
-- Saved runs can be reopened and compared
-
-## Demo credentials
-
-Named student demo accounts:
-
-- `abdul.basit@acts.my` / `12345`
-- `hysam@acts.my` / `123456`
-- `lin.tunoo@acts.my` / `1234567`
-- `poh.xinkat@acts.my` / `12345678`
-- `edwin@acts.my` / `123456789`
-
-Employer demo account:
-
-- `employer@acts.my` / `acts-employer`
-
-Newly registered users sign in with the username and password they create on the register page.
-
-The public navbar intentionally keeps the demo passwords off-screen. Use the login page for role access and this README for the preset credentials when presenting the prototype.
+again from the project root.
 
 ## Notes
 
